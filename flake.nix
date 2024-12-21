@@ -12,20 +12,16 @@
     pkgs = nixpkgs.legacyPackages.${system};
     gitignoreSrc = pkgs.callPackage inputs.gitignore { };
   in rec {
-    packages.starlight_engine = pkgs.callPackage ./default.nix { inherit gitignoreSrc; };
+    packages.starlight_format = pkgs.callPackage ./default.nix { inherit gitignoreSrc; };
 
     legacyPackages = packages;
 
-    defaultPackage = packages.starlight_engine;
+    defaultPackage = packages.starlight_format;
 
     devShell = pkgs.mkShell rec {
       CARGO_INSTALL_ROOT = "${toString ./.}/.cargo";
 
       buildInputs = with pkgs; [ cargo rustc git 
-        udev
-        alsa-lib vulkan-loader
-        xorg.libX11 xorg.libXcursor xorg.libXi xorg.libXrandr # To use the x11 feature
-        libxkbcommon wayland # To use the wayland feature
       ];
       nativeBuildInputs = [ pkgs.pkg-config ];
       env = {

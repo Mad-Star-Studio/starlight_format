@@ -23,16 +23,12 @@ let
     }) { inherit lib; }).gitignoreSource;
 in
 rustPlatform.buildRustPackage rec {
-  pname = "starlight_engine";
+  pname = "starlight_format";
   version = "0.0.1";
 
   src = gitignoreSource ./.;
 
   buildInputs = with pkgs; [
-    udev alsa-lib vulkan-loader
-    xorg.libX11 xorg.libXcursor xorg.libXi xorg.libXrandr # To use the x11 feature
-    libxkbcommon wayland # To use the wayland feature
-    renderdoc
   ];
   nativeBuildInputs = with pkgs; [ pkg-config ];
 
@@ -48,6 +44,6 @@ rustPlatform.buildRustPackage rec {
   meta = with stdenv.lib; {
     homepage = "";
     description = "";
-    license = "MIT License";
+    license = "GPLv3";
   };
 }
