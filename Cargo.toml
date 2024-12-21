@@ -5,4 +5,5 @@ edition = "2021"
 
 
 [dependencies]
-
+diesel = { version = "2.2", features = ["postgres", "sqlite"] }
+libsqlite3-sys = { version = "0.29", features = ["bundled"] }
